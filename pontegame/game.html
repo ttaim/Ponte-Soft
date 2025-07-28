@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألعاب للاعبين - Ponte Soft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --dark-color: #0a2463;
+            --light-color: #e8f1f2;
+            --success-color: #4caf50;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+            --text-color: #333;
+            --text-light: #777;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* شريط التنقل */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* شاشة الترحيب */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* بطاقات الألعاب */
+        .game-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .game-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .game-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .game-card-content {
+            padding: 20px;
+        }
+        
+        .game-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .game-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .game-card .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .game-card .players {
+            display: flex;
+            align-items: center;
+        }
+        
+        .game-card .players i {
+            margin-left: 5px;
+            color: var(--accent-color);
+        }
+        
+        .game-card .rating {
+            color: var(--warning-color);
+        }
+        
+        /* منطقة الألعاب */
+        .game-area {
+            display: none;
+            margin-top: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .game-header h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .game-header h2 i {
+            margin-left: 10px;
+            color: var(--accent-color);
+        }
+        
+        .back-button {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        .back-button:hover {
+            background-color: #d32f2f;
+            transform: translateX(-5px);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .player-info .player-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .player-info .player-name {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .player-info .player-score {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .timer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timer i {
+            margin-left: 5px;
+        }
+        
+        /* تيك تاك تو */
+        #tic-tac-toe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            margin: 0 auto;
+            max-width: 400px;
+            aspect-ratio: 1/1;
+        }
+        
+        .tic-tac-toe-cell {
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tic-tac-toe-cell:hover {
+            background-color: #dde8eb;
+            transform: scale(1.03);
+        }
+        
+        .tic-tac-toe-cell.x {
+            color: var(--primary-color);
+        }
+        
+        .tic-tac-toe-cell.o {
+            color: var(--danger-color);
+        }
+        
+        .tic-tac-toe-cell.winner {
+            animation: pulse 1s infinite;
+            background-color: rgba(76, 175, 80, 0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* لعبة الداما */
+        #checkers-board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            margin: 0 auto;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            border: 3px solid var(--dark-color);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .checkers-cell {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .checkers-cell.light {
+            background-color: #f0d9b5;
+        }
+        
+        .checkers-cell.dark {
+            background-color: #b58863;
+        }
+        
+        .checkers-piece {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .checkers-piece.red {
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #d40000);
+        }
+        
+        .checkers-piece.black {
+            background: radial-gradient(circle at 30% 30%, #666, #000);
+        }
+        
+        .checkers-piece.king::after {
+            content: "♔";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: gold;
+            font-size: 24px;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .checkers-piece.selected {
+            box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .checkers-valid-move {
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            background-color: rgba(0, 255, 0, 0.7);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* لعبة الذاكرة */
+        #memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            margin: 0 auto;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+        }
+        
+        .memory-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            font-size: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            border-radius: 10px;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .memory-card.matched {
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(0);
+        }
+        
+        .memory-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 100px;
+        }
+        
+        .stat-box.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .stat-box h4 {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .stat-box p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* نافذة ABOUT المنبثقة */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.4s;
+            position: relative;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .modal-header h2 i {
+            margin-left: 10px;
+            color: var(--accent-color);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+            transform: rotate(90deg);
+        }
+        
+        .about-content h3 {
+            color: var(--secondary-color);
+            margin: 20px 0 15px;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .about-content h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            right: 0;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .about-content ul {
+            margin-bottom: 20px;
+            padding-right: 20px;
+        }
+        
+        .about-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .about-content li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 0.5em;
+        }
+        
+        .team-section {
+            margin: 30px 0;
+        }
+        
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .team-member:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-left: 20px;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .team-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .team-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        /* نافذة إدخال أسماء اللاعبين */
+        .player-names-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .player-names-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.4s;
+        }
+        
+        .player-names-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.3);
+        }
+        
+        .start-game-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .start-game-btn:hover {
+            background-color: #388e3c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .game-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .back-button {
+                margin-top: 15px;
+                align-self: flex-end;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            #tic-tac-toe-board {
+                max-width: 300px;
+            }
+            
+            #checkers-board {
+                max-width: 350px;
+            }
+            
+            #memory-board {
+                max-width: 350px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-member img {
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 250px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            #tic-tac-toe-board {
+                max-width: 250px;
+            }
+            
+            #checkers-board {
+                max-width: 300px;
+            }
+            
+            #memory-board {
+                max-width: 300px;
+                gap: 10px;
+            }
+            
+            .memory-card {
+                font-size: 1.5rem;
+            }
+            
+            .stat-box {
+                min-width: auto;
+                padding: 5px;
+            }
+            
+            .stat-box h4 {
+                font-size: 0.8rem;
+            }
+            
+            .stat-box p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-gamepad"></i>
+            <span>ألعاب Ponte Soft</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#" onclick="showAboutModal()"><i class="fas fa-info-circle"></i> حولنا</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> التصنيفات</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+        </ul>
+    </nav>
+    
+    <!-- شاشة الترحيب -->
+    <section class="hero">
+        <h1>استمتع بأفضل الألعاب مع أصدقائك</h1>
+        <p>موقعنا يوفر مجموعة من الألعاب الممتعة التي يمكنك لعبها مع صديقك على نفس الجهاز</p>
+        <button class="cta-button" onclick="scrollToGames()"><i class="fas fa-arrow-down"></i> تصفح الألعاب</button>
+    </section>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <div class="section-title">
+            <h2>اختر لعبتك المفضلة</h2>
+        </div>
+        
+        <div class="game-selection">
+            <div class="game-card" onclick="showPlayerNamesModal('tic-tac-toe')">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="تيك تاك تو">
+                <div class="game-card-content">
+                    <h3>تيك تاك تو</h3>
+                    <p>لعبة X و O الكلاسيكية للاعبين، تحدي ذكاء وسرعة تفكير</p>
+                    <div class="game-meta">
+                        <div class="players">
+                            <i class="fas fa-users"></i>
+                            <span>لاعبين</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="showPlayerNamesModal('checkers')">
+                <img src="https://images.unsplash.com/photo-1543092587-d8b8feaf4f23?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="داما">
+                <div class="game-card-content">
+                    <h3>لعبة الداما</h3>
+                    <p>لعبة الداما التقليدية للاعبين، استراتيجية وتخطيط</p>
+                    <div class="game-meta">
+                        <div class="players">
+                            <i class="fas fa-users"></i>
+                            <span>لاعبين</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="showPlayerNamesModal('memory')">
+                <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="لعبة الذاكرة">
+                <div class="game-card-content">
+                    <h3>لعبة الذاكرة</h3>
+                    <p>اختبر ذاكرتك مع صديقك في هذه اللعبة الممتعة</p>
+                    <div class="game-meta">
+                        <div class="players">
+                            <i class="fas fa-users"></i>
+                            <span>لاعبين</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="showAboutModal()">
+                <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="حول الموقع">
+                <div class="game-card-content">
+                    <h3>حول الموقع</h3>
+                    <p>تعرف على فريق التطوير ومعلومات عن الموقع</p>
+                    <div class="game-meta">
+                        <div class="players">
+                            <i class="fas fa-info-circle"></i>
+                            <span>معلومات</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- تيك تاك تو -->
+        <div id="tic-tac-toe-game" class="game-area">
+            <div class="game-header">
+                <h2><i class="fas fa-times"></i> تيك تاك تو <i class="far fa-circle"></i></h2>
+                <button class="back-button" onclick="hideGames()"><i class="fas fa-arrow-left"></i> العودة</button>
+            </div>
+            
+            <div class="game-info">
+                <div class="player-info">
+                    <div class="player-icon">X</div>
+                    <div>
+                        <span class="player-name" id="player1-name-tic">اللاعب 1</span>
+                        <span class="player-score" id="player1-score-tic">0</span>
+                    </div>
+                </div>
+                
+                <div class="timer">
+                    <i class="far fa-clock"></i>
+                    <span id="tic-tac-toe-timer">00:00</span>
+                </div>
+                
+                <div class="player-info">
+                    <div class="player-icon">O</div>
+                    <div>
+                        <span class="player-name" id="player2-name-tic">اللاعب 2</span>
+                        <span class="player-score" id="player2-score-tic">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-turn" id="tic-tac-toe-turn">دور اللاعب <span id="current-player-name-tic">X</span></div>
+            
+            <div id="tic-tac-toe-board"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="cta-button" onclick="resetTicTacToe()"><i class="fas fa-redo"></i> إعادة اللعبة</button>
+            </div>
+        </div>
+        
+        <!-- لعبة الداما -->
+        <div id="checkers-game" class="game-area">
+            <div class="game-header">
+                <h2><i class="fas fa-chess-board"></i> لعبة الداما</h2>
+                <button class="back-button" onclick="hideGames()"><i class="fas fa-arrow-left"></i> العودة</button>
+            </div>
+            
+            <div class="game-info">
+                <div class="player-info">
+                    <div class="player-icon" style="background-color: #d40000;">1</div>
+                    <div>
+                        <span class="player-name" id="player1-name-checkers">اللاعب 1</span>
+                        <span class="player-score" id="player1-score-checkers">0</span>
+                    </div>
+                </div>
+                
+                <div class="timer">
+                    <i class="far fa-clock"></i>
+                    <span id="checkers-timer">00:00</span>
+                </div>
+                
+                <div class="player-info">
+                    <div class="player-icon" style="background-color: #333;">2</div>
+                    <div>
+                        <span class="player-name" id="player2-name-checkers">اللاعب 2</span>
+                        <span class="player-score" id="player2-score-checkers">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-turn" id="checkers-turn">دور اللاعب <span id="current-player-name-checkers">الأحمر</span></div>
+            
+            <div id="checkers-board"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="cta-button" onclick="resetCheckers()"><i class="fas fa-redo"></i> إعادة اللعبة</button>
+            </div>
+        </div>
+        
+        <!-- لعبة الذاكرة -->
+        <div id="memory-game" class="game-area">
+            <div class="game-header">
+                <h2><i class="fas fa-brain"></i> لعبة الذاكرة</h2>
+                <button class="back-button" onclick="hideGames()"><i class="fas fa-arrow-left"></i> العودة</button>
+            </div>
+            
+            <div class="game-info">
+                <div class="player-info">
+                    <div class="player-icon">1</div>
+                    <div>
+                        <span class="player-name" id="player1-name-memory">اللاعب 1</span>
+                        <span class="player-score" id="player1-score-memory">0</span>
+                    </div>
+                </div>
+                
+                <div class="timer">
+                    <i class="far fa-clock"></i>
+                    <span id="memory-timer">00:00</span>
+                </div>
+                
+                <div class="player-info">
+                    <div class="player-icon">2</div>
+                    <div>
+                        <span class="player-name" id="player2-name-memory">اللاعب 2</span>
+                        <span class="player-score" id="player2-score-memory">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-stats">
+                <div class="stat-box" id="player1-stat">
+                    <h4>اللاعب 1</h4>
+                    <p id="player1-matches">0 أزواج</p>
+                </div>
+                
+                <div class="stat-box active" id="current-player-stat">
+                    <h4>دور اللاعب</h4>
+                    <p id="memory-current-player">1</p>
+                </div>
+                
+                <div class="stat-box" id="player2-stat">
+                    <h4>اللاعب 2</h4>
+                    <p id="player2-matches">0 أزواج</p>
+                </div>
+            </div>
+            
+            <div id="memory-board"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="cta-button" onclick="resetMemoryGame()"><i class="fas fa-redo"></i> إعادة اللعبة</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة ABOUT المنبثقة -->
+    <div class="modal-overlay" id="about-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-info-circle"></i> حول التطبيق</h2>
+                <button class="close-modal" onclick="hideAboutModal()">&times;</button>
+            </div>
+            
+            <div class="about-content">
+                <h3>فكرة الموقع</h3>
+                <p>هذا الموقع تم تطويره لتوفير ألعاب مسلية يمكن لعبها بين شخصين على نفس المتصفح بدون الحاجة إلى اتصال بالإنترنت أو أجهزة إضافية. الهدف هو توفير وسيلة ترفيهية بسيطة يمكن للجميع الاستمتاع بها في أي وقت ومكان.</p>
+                
+                <h3>معلومات التطبيق</h3>
+                <ul>
+                    <li>الإصدار: 2.0.0</li>
+                    <li>تاريخ الإصدار: يوليو 2025</li>
+                    <li>الترخيص: مفتوح المصدر</li>
+                    <li>التقنيات المستخدمة: HTML5, CSS3, JavaScript</li>
+                    <li>المتصفحات المدعومة: Chrome, Firefox, Safari, Edge</li>
+                </ul>
+                
+                <h3>فريق التطوير</h3>
+                <div class="team-section">
+                    <div class="team-member">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="فريق Ponte Soft">
+                        <div class="team-info">
+                            <h4>فريق Ponte Soft</h4>
+                            <p>نحن فريق من المطورين المتحمسين لإنشاء تطبيقات ويب مفيدة ومسلية. نؤمن بقوة الألعاب في تواصل الناس وتطوير مهاراتهم.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="الرئيس التنفيذي">
+                        <div class="team-info">
+                            <h4>الرئيس التنفيذي</h4>
+                            <p>مطور الواجهة الأمامية وخبير تجربة المستخدم. مسؤول عن التصميم العام وواجهة المستخدم.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="تيم ساهر محمد">
+                        <div class="team-info">
+                            <h4>تيم ساهر محمد</h4>
+                            <p>مصمم الواجهة وخبيرة تجربة المستخدم. مسؤولة عن التصاميم والألوان وتجربة اللعب.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                                <a href="#"><i class="fab fa-dribbble"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>للتواصل معنا</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:ponte9354@gmail.com">ponte9354@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <a href="index.html" target="_blank">www.pontesoft.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/ponte-soft" target="_blank">github.com/ponte-soft</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة إدخال أسماء اللاعبين -->
+    <div class="player-names-modal" id="player-names-modal">
+        <div class="player-names-content">
+            <h2><i class="fas fa-users"></i> أدخل أسماء اللاعبين</h2>
+            
+            <div class="form-group">
+                <label for="player1-name">اسم اللاعب الأول:</label>
+                <input type="text" id="player1-name" placeholder="أدخل اسم اللاعب الأول">
+            </div>
+            
+            <div class="form-group">
+                <label for="player2-name">اسم اللاعب الثاني:</label>
+                <input type="text" id="player2-name" placeholder="أدخل اسم اللاعب الثاني">
+            </div>
+            
+            <button class="start-game-btn" onclick="startGame()"><i class="fas fa-play"></i> بدء اللعبة</button>
+        </div>
+    </div>
+    
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>ألعاب Ponte Soft</span>
+            </div>
+            
+            <ul class="footer-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#" onclick="showAboutModal()">حولنا</a></li>
+                <li><a href="#">الألعاب</a></li>
+                <li><a href="#">الشروط والأحكام</a></li>
+                <li><a href="#">سياسة الخصوصية</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Ponte Soft. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // متغيرات عامة
+        let currentGame = '';
+        let player1Name = 'اللاعب 1';
+        let player2Name = 'اللاعب 2';
+        
+        // التمرير إلى قسم الألعاب
+        function scrollToGames() {
+            document.querySelector('.game-selection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // عرض وإخفاء الألعاب
+        function showGame(gameId) {
+            document.querySelectorAll('.game-area').forEach(area => {
+                area.style.display = 'none';
+            });
+            document.getElementById(gameId + '-game').style.display = 'block';
+            document.querySelector('.game-selection').style.display = 'none';
+            
+            // بدء المؤقت للعبة المحددة
+            startTimer(gameId);
+            
+            // تحديث أسماء اللاعبين
+            updatePlayerNames(gameId);
+        }
+        
+        function hideGames() {
+            document.querySelectorAll('.game-area').forEach(area => {
+                area.style.display = 'none';
+                // إيقاف المؤقت عند العودة
+                stopTimer(currentGame);
+            });
+            document.querySelector('.game-selection').style.display = 'grid';
+        }
+        
+        // عرض وإخفاء نافذة ABOUT
+        function showAboutModal() {
+            document.getElementById('about-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideAboutModal() {
+            document.getElementById('about-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // عرض نافذة أسماء اللاعبين
+        function showPlayerNamesModal(gameId) {
+            currentGame = gameId;
+            document.getElementById('player-names-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hidePlayerNamesModal() {
+            document.getElementById('player-names-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // بدء اللعبة بعد إدخال الأسماء
+        function startGame() {
+            const player1Input = document.getElementById('player1-name');
+            const player2Input = document.getElementById('player2-name');
+            
+            if (player1Input.value.trim() !== '') {
+                player1Name = player1Input.value.trim();
+            }
+            
+            if (player2Input.value.trim() !== '') {
+                player2Name = player2Input.value.trim();
+            }
+            
+            hidePlayerNamesModal();
+            showGame(currentGame);
+        }
+        
+        // تحديث أسماء اللاعبين في الواجهة
+        function updatePlayerNames(gameId) {
+            const gamePrefix = gameId === 'tic-tac-toe' ? 'tic' : 
+                             gameId === 'checkers' ? 'checkers' : 'memory';
+            
+            document.getElementById(`player1-name-${gamePrefix}`).textContent = player1Name;
+            document.getElementById(`player2-name-${gamePrefix}`).textContent = player2Name;
+            
+            if (gameId === 'tic-tac-toe') {
+                document.getElementById('current-player-name-tic').textContent = player1Name;
+            } else if (gameId === 'checkers') {
+                document.getElementById('current-player-name-checkers').textContent = 
+                    currentPlayerCheckers === 'red' ? player1Name : player2Name;
+            }
+        }
+        
+        // نظام المؤقت
+        let timerInterval;
+        let seconds = 0;
+        
+        function startTimer(gameId) {
+            stopTimer(gameId); // تأكد من إيقاف أي مؤقت سابق
+            seconds = 0;
+            updateTimerDisplay(gameId);
+            
+            timerInterval = setInterval(() => {
+                seconds++;
+                updateTimerDisplay(gameId);
+            }, 1000);
+        }
+        
+        function stopTimer(gameId) {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        }
+        
+        function updateTimerDisplay(gameId) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById(`${gameId}-timer`).textContent = timeString;
+        }
+        
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            initTicTacToe();
+            initCheckers();
+            initMemoryGame();
+            
+            // إغلاق النوافذ المنبثقة عند النقر خارجها
+            document.getElementById('about-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideAboutModal();
+                }
+            });
+            
+            document.getElementById('player-names-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hidePlayerNamesModal();
+                }
+            });
+        });
+        
+        // لعبة تيك تاك تو
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        let player1Score = 0;
+        let player2Score = 0;
+        
+        function initTicTacToe() {
+            const boardElement = document.getElementById('tic-tac-toe-board');
+            boardElement.innerHTML = '';
+            
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('tic-tac-toe-cell');
+                cell.setAttribute('data-index', i);
+                cell.addEventListener('click', handleTicTacToeClick);
+                boardElement.appendChild(cell);
+            }
+        }
+        
+        function handleTicTacToeClick(e) {
+            const index = e.target.getAttribute('data-index');
+            
+            if (board[index] !== '' || !gameActive) return;
+            
+            board[index] = currentPlayer;
+            e.target.textContent = currentPlayer;
+            e.target.classList.add(currentPlayer.toLowerCase());
+            
+            checkTicTacToeWinner();
+        }
+        
+        function checkTicTacToeWinner() {
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // صفوف
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // أعمدة
+                [0, 4, 8], [2, 4, 6]             // قطري
+            ];
+            
+            let roundWon = false;
+            
+            for (let i = 0; i < winningConditions.length; i++) {
+                const [a, b, c] = winningConditions[i];
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    roundWon = true;
+                    
+                    // تمييز الخلايا الفائزة
+                    document.querySelector(`.tic-tac-toe-cell[data-index="${a}"]`).classList.add('winner');
+                    document.querySelector(`.tic-tac-toe-cell[data-index="${b}"]`).classList.add('winner');
+                    document.querySelector(`.tic-tac-toe-cell[data-index="${c}"]`).classList.add('winner');
+                    
+                    break;
+                }
+            }
+            
+            if (roundWon) {
+                if (currentPlayer === 'X') {
+                    player1Score++;
+                    document.getElementById('player1-score-tic').textContent = player1Score;
+                } else {
+                    player2Score++;
+                    document.getElementById('player2-score-tic').textContent = player2Score;
+                }
+                
+                document.getElementById('tic-tac-toe-turn').innerHTML = 
+                    `اللاعب <span style="color: ${currentPlayer === 'X' ? '#4a6fa5' : '#f44336'}">${currentPlayer === 'X' ? player1Name : player2Name}</span> فاز!`;
+                gameActive = false;
+                return;
+            }
+            
+            if (!board.includes('')) {
+                document.getElementById('tic-tac-toe-turn').innerHTML = 'تعادل!';
+                gameActive = false;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('tic-tac-toe-turn').innerHTML = 
+                    `دور اللاعب <span style="color: ${currentPlayer === 'X' ? '#4a6fa5' : '#f44336'}">${currentPlayer === 'X' ? player1Name : player2Name}</span>`;
+                document.getElementById('current-player-name-tic').textContent = currentPlayer === 'X' ? player1Name : player2Name;
+            }
+        }
+        
+        function resetTicTacToe() {
+            currentPlayer = 'X';
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            
+            document.querySelectorAll('.tic-tac-toe-cell').forEach(cell => {
+                cell.textContent = '';
+                cell.className = 'tic-tac-toe-cell';
+                cell.classList.remove('x', 'o', 'winner');
+            });
+            
+            document.getElementById('tic-tac-toe-turn').innerHTML = 
+                `دور اللاعب <span style="color: #4a6fa5">${player1Name}</span>`;
+            document.getElementById('current-player-name-tic').textContent = player1Name;
+        }
+        
+        // لعبة الداما
+        let checkersBoard = [];
+        let selectedPiece = null;
+        let currentPlayerCheckers = 'red';
+        let player1ScoreCheckers = 0;
+        let player2ScoreCheckers = 0;
+        
+        function initCheckers() {
+            const boardElement = document.getElementById('checkers-board');
+            boardElement.innerHTML = '';
+            
+            // إنشاء لوحة الداما
+            checkersBoard = Array(8).fill().map(() => Array(8).fill(null));
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('checkers-cell');
+                    cell.classList.add((row + col) % 2 === 0 ? 'light' : 'dark');
+                    cell.setAttribute('data-row', row);
+                    cell.setAttribute('data-col', col);
+                    cell.addEventListener('click', handleCheckersClick);
+                    boardElement.appendChild(cell);
+                    
+                    // وضع قطع اللاعبين
+                    if ((row + col) % 2 !== 0) {
+                        if (row < 3) {
+                            checkersBoard[row][col] = { player: 'black', king: false };
+                        } else if (row > 4) {
+                            checkersBoard[row][col] = { player: 'red', king: false };
+                        }
+                    }
+                }
+            }
+            
+            renderCheckersBoard();
+        }
+        
+        function renderCheckersBoard() {
+            const cells = document.querySelectorAll('.checkers-cell');
+            cells.forEach(cell => {
+                cell.innerHTML = '';
+                
+                const row = parseInt(cell.getAttribute('data-row'));
+                const col = parseInt(cell.getAttribute('data-col'));
+                
+                if (checkersBoard[row][col]) {
+                    const piece = document.createElement('div');
+                    piece.classList.add('checkers-piece', checkersBoard[row][col].player);
+                    if (checkersBoard[row][col].king) {
+                        piece.classList.add('king');
+                    }
+                    piece.setAttribute('data-row', row);
+                    piece.setAttribute('data-col', col);
+                    cell.appendChild(piece);
+                }
+            });
+        }
+        
+        function handleCheckersClick(e) {
+            const row = parseInt(e.target.getAttribute('data-row'));
+            const col = parseInt(e.target.getAttribute('data-col'));
+            
+            // إذا كان هناك قطعة محددة، تحقق من الحركات الصالحة
+            if (selectedPiece) {
+                const [selectedRow, selectedCol] = selectedPiece;
+                
+                // تحقق إذا كانت النقرة على قطعة أخرى لنفس اللاعب
+                if (checkersBoard[row][col] && checkersBoard[row][col].player === currentPlayerCheckers) {
+                    selectedPiece = [row, col];
+                    showValidMoves(row, col);
+                    return;
+                }
+                
+                // تحقق إذا كانت الحركة صالحة
+                const validMoves = getValidMoves(selectedRow, selectedCol);
+                const isValidMove = validMoves.some(move => move.row === row && move.col === col);
+                
+                if (isValidMove) {
+                    // تنفيذ الحركة
+                    const move = validMoves.find(m => m.row === row && m.col === col);
+                    movePiece(selectedRow, selectedCol, row, col, move.capture);
+                    
+                    // تبديل اللاعب
+                    currentPlayerCheckers = currentPlayerCheckers === 'red' ? 'black' : 'red';
+                    document.getElementById('checkers-turn').innerHTML = 
+                        `دور اللاعب <span style="color: ${currentPlayerCheckers === 'red' ? '#d40000' : '#333'}">${currentPlayerCheckers === 'red' ? player1Name : player2Name}</span>`;
+                    document.getElementById('current-player-name-checkers').textContent = 
+                        currentPlayerCheckers === 'red' ? player1Name : player2Name;
+                    
+                    // إلغاء تحديد القطعة
+                    selectedPiece = null;
+                    clearValidMoves();
+                }
+            } else if (checkersBoard[row][col] && checkersBoard[row][col].player === currentPlayerCheckers) {
+                // تحديد قطعة اللاعب الحالي
+                selectedPiece = [row, col];
+                showValidMoves(row, col);
+            }
+        }
+        
+        function showValidMoves(row, col) {
+            clearValidMoves();
+            
+            const validMoves = getValidMoves(row, col);
+            validMoves.forEach(move => {
+                const cell = document.querySelector(`.checkers-cell[data-row="${move.row}"][data-col="${move.col}"]`);
+                const marker = document.createElement('div');
+                marker.classList.add('checkers-valid-move');
+                cell.appendChild(marker);
+            });
+            
+            // تمييز القطعة المحددة
+            const selectedCell = document.querySelector(`.checkers-cell[data-row="${row}"][data-col="${col}"] .checkers-piece`);
+            if (selectedCell) {
+                selectedCell.classList.add('selected');
+            }
+        }
+        
+        function getValidMoves(row, col) {
+            const piece = checkersBoard[row][col];
+            const moves = [];
+            
+            if (!piece) return moves;
+            
+            const direction = piece.player === 'red' ? -1 : 1;
+            const isKing = piece.king;
+            
+            // حركات بسيطة
+            for (let dir of isKing ? [-1, 1] : [direction]) {
+                const newRow = row + dir;
+                if (newRow >= 0 && newRow < 8) {
+                    for (let newCol of [col - 1, col + 1]) {
+                        if (newCol >= 0 && newCol < 8) {
+                            if (!checkersBoard[newRow][newCol]) {
+                                moves.push({ row: newRow, col: newCol });
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // حركات القفز (الأكل)
+            for (let dir of isKing ? [-1, 1] : [direction]) {
+                const newRow = row + dir * 2;
+                if (newRow >= 0 && newRow < 8) {
+                    for (let newCol of [col - 2, col + 2]) {
+                        if (newCol >= 0 && newCol < 8) {
+                            const midRow = row + dir;
+                            const midCol = col + (newCol - col) / 2;
+                            
+                            if (checkersBoard[midRow][midCol] && 
+                                checkersBoard[midRow][midCol].player !== piece.player && 
+                                !checkersBoard[newRow][newCol]) {
+                                moves.push({ row: newRow, col: newCol, capture: true });
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return moves;
+        }
+        
+        function movePiece(fromRow, fromCol, toRow, toCol, isCapture) {
+            const piece = checkersBoard[fromRow][fromCol];
+            checkersBoard[fromRow][fromCol] = null;
+            checkersBoard[toRow][toCol] = piece;
+            
+            // تحقق إذا أصبحت القطعة ملكة
+            if ((piece.player === 'red' && toRow === 0) || 
+                (piece.player === 'black' && toRow === 7)) {
+                piece.king = true;
+            }
+            
+            // إذا كانت الحركة قفزة (أكل)، أزل القطعة التي تم أكلها
+            if (isCapture) {
+                const midRow = (fromRow + toRow) / 2;
+                const midCol = (fromCol + toCol) / 2;
+                checkersBoard[midRow][midCol] = null;
+                
+                // تحديث النقاط
+                if (currentPlayerCheckers === 'red') {
+                    player1ScoreCheckers++;
+                    document.getElementById('player1-score-checkers').textContent = player1ScoreCheckers;
+                } else {
+                    player2ScoreCheckers++;
+                    document.getElementById('player2-score-checkers').textContent = player2ScoreCheckers;
+                }
+            }
+            
+            renderCheckersBoard();
+        }
+        
+        function clearValidMoves() {
+            document.querySelectorAll('.checkers-valid-move').forEach(marker => {
+                marker.remove();
+            });
+            
+            document.querySelectorAll('.checkers-piece.selected').forEach(piece => {
+                piece.classList.remove('selected');
+            });
+        }
+        
+        function resetCheckers() {
+            initCheckers();
+            currentPlayerCheckers = 'red';
+            selectedPiece = null;
+            document.getElementById('checkers-turn').innerHTML = 
+                `دور اللاعب <span style="color: #d40000">${player1Name}</span>`;
+            document.getElementById('current-player-name-checkers').textContent = player1Name;
+        }
+        
+        // لعبة الذاكرة
+        let memoryCards = [];
+        let flippedCards = [];
+        let lockBoard = false;
+        let currentPlayerMemory = 1;
+        let playerScores = [0, 0];
+        let playerMatches = [0, 0];
+        let matchedPairs = 0;
+        
+        function initMemoryGame() {
+            const symbols = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+            memoryCards = [...symbols, ...symbols];
+            
+            // خلط الأوراق
+            for (let i = memoryCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [memoryCards[i], memoryCards[j]] = [memoryCards[j], memoryCards[i]];
+            }
+            
+            const boardElement = document.getElementById('memory-board');
+            boardElement.innerHTML = '';
+            
+            memoryCards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.setAttribute('data-index', index);
+                card.setAttribute('data-symbol', symbol);
+                card.addEventListener('click', flipCard);
+                boardElement.appendChild(card);
+            });
+            
+            // إخفاء جميع الأوراق بعد ثانية
+            setTimeout(() => {
+                document.querySelectorAll('.memory-card').forEach(card => {
+                    card.classList.add('flipped');
+                });
+            }, 1000);
+            
+            // إعادة تعيين حالة اللعبة
+            flippedCards = [];
+            lockBoard = false;
+            currentPlayerMemory = 1;
+            playerScores = [0, 0];
+            playerMatches = [0, 0];
+            matchedPairs = 0;
+            updateMemoryScores();
+            
+            // تحديث اللاعب الحالي
+            document.getElementById('player1-stat').classList.remove('active');
+            document.getElementById('player2-stat').classList.remove('active');
+            document.getElementById('current-player-stat').classList.add('active');
+            document.getElementById('memory-current-player').textContent = currentPlayerMemory;
+        }
+        
+        function flipCard() {
+            if (lockBoard) return;
+            if (this.classList.contains('flipped') || this === flippedCards[0]) return;
+            
+            this.classList.remove('flipped');
+            this.textContent = this.getAttribute('data-symbol');
+            
+            if (flippedCards.length === 0) {
+                flippedCards.push(this);
+                return;
+            }
+            
+            flippedCards.push(this);
+            checkForMatch();
+        }
+        
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            const symbol1 = card1.getAttribute('data-symbol');
+            const symbol2 = card2.getAttribute('data-symbol');
+            
+            if (symbol1 === symbol2) {
+                // تطابق
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                
+                playerScores[currentPlayerMemory - 1]++;
+                playerMatches[currentPlayerMemory - 1]++;
+                matchedPairs++;
+                updateMemoryScores();
+                
+                if (matchedPairs === memoryCards.length / 2) {
+                    setTimeout(() => {
+                        let winnerMessage;
+                        if (playerScores[0] > playerScores[1]) {
+                            winnerMessage = `${player1Name} فاز باللعبة!`;
+                        } else if (playerScores[1] > playerScores[0]) {
+                            winnerMessage = `${player2Name} فاز باللعبة!`;
+                        } else {
+                            winnerMessage = 'تعادل!';
+                        }
+                        
+                        alert(`اللعبة انتهت!\n${winnerMessage}\n\nالنتيجة النهائية:\n${player1Name}: ${playerScores[0]}\n${player2Name}: ${playerScores[1]}`);
+                    }, 500);
+                }
+                
+                flippedCards = [];
+            } else {
+                // لا تطابق
+                lockBoard = true;
+                
+                setTimeout(() => {
+                    card1.classList.add('flipped');
+                    card2.classList.add('flipped');
+                    card1.textContent = '';
+                    card2.textContent = '';
+                    flippedCards = [];
+                    lockBoard = false;
+                    
+                    // تبديل اللاعب
+                    currentPlayerMemory = currentPlayerMemory === 1 ? 2 : 1;
+                    updateCurrentPlayer();
+                }, 1000);
+            }
+        }
+        
+        function updateMemoryScores() {
+            document.getElementById('player1-score-memory').textContent = playerScores[0];
+            document.getElementById('player2-score-memory').textContent = playerScores[1];
+            document.getElementById('player1-matches').textContent = `${playerMatches[0]} أزواج`;
+            document.getElementById('player2-matches').textContent = `${playerMatches[1]} أزواج`;
+        }
+        
+        function updateCurrentPlayer() {
+            document.getElementById('memory-current-player').textContent = currentPlayerMemory;
+            document.getElementById('player1-stat').classList.remove('active');
+            document.getElementById('player2-stat').classList.remove('active');
+            document.getElementById('current-player-stat').classList.add('active');
+        }
+        
+        function resetMemoryGame() {
+            initMemoryGame();
+        }
+    </script>
+</body>
+</html>

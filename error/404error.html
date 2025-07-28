@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - Page Not Found</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .error-container {
+      max-width: 600px;
+    }
+
+    .error-code {
+      font-size: 120px;
+      font-weight: bold;
+      color: #ff4d4d;
+    }
+
+    .error-message {
+      font-size: 28px;
+      margin: 20px 0;
+      color: #444;
+    }
+
+    .game-style {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .back-button {
+      padding: 12px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+
+    img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" alt="404 Error Image">
+    <div class="error-code">404</div>
+    <div class="error-message">Oops! Page Not Found</div>
+    <div class="game-style">Looks like this level doesn't exist in Ponte Game!</div>
+    <a href="index.html" class="back-button">Back to Home</a>
+  </div>
+</body>
+</html>

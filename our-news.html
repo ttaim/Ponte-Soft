@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تطبيقاتنا ودوراتنا</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <button class="close-btn" onclick="hideOverlay()">X</button>
+      
+      <div class="form">
+        <div class="certificate-container">
+  <img src="shhada.png" alt="صورة الشهادة">
+</div>
+        <h3>مميزات الدورة:</h3>
+        <ul>
+          <li>مدة الدورة: 5 ساعات</li>
+          <li>محاضرة مسجلة</li>
+          <li> شهادة معتمدة جزئيا</li>
+          <li>سعر الدورة: 70 دولار</li>
+        </ul>
+        <h3>سجل الآن:</h3>
+        <form action="https://formspree.io/f/xdkdzkkz" method="POST">
+          <input type="text" name="name" placeholder="الاسم الكامل" required>
+          <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+          <input type="text" name="phone" placeholder="رقم الهاتف" required>
+          <textarea name="about" rows="3" placeholder="نبذة عنك" required></textarea>
+          <input type="text" name="cardnumber" placeholder="رقم بطاقة الائتمان" required>
+          <input type="text" name="cardname" placeholder="اسم صاحب البطاقة" required>
+          <input type="text" name="exp" placeholder="MM/YY" required>
+          <input type="text" name="cvv" placeholder="CVV" required>
+          <button type="submit">إرسال ودفع</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x180?text=XO+Game" alt="XO">
+      <div class="card-content">
+        <h2>لعبة XO</h2>
+        <p>استمتع بلعب لعبة XO الذكية والمسلية.</p>
+        <button class="btn" onclick="showOverlay()">تقدّم الآن</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="pontegameimg.png" alt="PONTE GAME">
+      <div class="card-content">
+        <h2>PONTE GAME</h2>
+        <p>مجموعة ألعاب ترفيهية حماسية.</p>
+        <a class="btn" href="pontegame/game.html">العب الان<a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ui.jpg" alt="دورة تطوير واجهات المستخدم">
+      <div class="card-content">
+        <h2>دورة تطوير واجهات المستخدم</h2>
+        <p>تعلم بناء واجهات جميلة وعملية باستخدام HTML, CSS, JS.</p>
+        <button class="btn" onclick="showOverlay()">تقدّم الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showOverlay() {
+      document.getElementById("overlay").style.display = "flex";
+    }
+
+    function hideOverlay() {
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
